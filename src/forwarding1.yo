@@ -1,0 +1,28 @@
+                      | 
+  0x000:              |     .pos 0x000
+  0x000: 30f205000000 |     irmovl  $5,%edx
+  0x006: 10           |     nop
+  0x007: 10           |     nop
+  0x008: 10           |     nop
+  0x009: 30f101000000 |     irmovl  $1,%ecx
+  0x00f: 6112         |     subl    %ecx,%edx
+  0x011: 10           |     nop
+  0x012: 10           |     nop
+  0x013: 10           |     nop
+  0x014: 10           |     nop
+  0x015: 10           |     nop
+  0x016: 503200000000 |     mrmovl  (%edx),%ebx
+  0x01c: 10           |     nop
+  0x01d: 10           |     nop
+  0x01e: 10           |     nop
+  0x01f: 403000000000 |     rmmovl  %ebx,(%eax)
+  0x025: 10           |     nop
+  0x026: 10           |     nop
+  0x027: 10           |     nop
+  0x028: 10           |     nop
+  0x029: 00           |     halt
+  0x02a: 10           |     nop
+  0x02b: 10           |     nop
+  0x02c: 10           |     nop
+  0x02d: 10           |     nop
+  0x02e: 10           |     nop

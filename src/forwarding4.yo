@@ -1,0 +1,26 @@
+                      | 
+  0x000:              |     .pos 0x000
+  0x000: 30f205000000 |     irmovl  $5,%edx
+  0x006: 30f600010000 |     irmovl  out,%esi
+  0x00c: 30f145000000 |     irmovl  $69,%ecx
+  0x012: 30f302000000 |     irmovl  $2,%ebx
+  0x018: 30f101000000 |     irmovl  $1,%ecx
+  0x01e: 10           |     nop                     # test M_valE valA
+  0x01f: 6112         |     subl    %ecx,%edx       # test e_valE valA, register read valB
+  0x021: 6132         |     subl    %ebx,%edx       # e_valE valB
+  0x023: 402600000000 |     rmmovl  %edx,(%esi)     # 2 into 0x100
+  0x029: 500200000000 |     mrmovl  (%edx),%eax     # 5 into eax
+  0x02f: 30f102000000 |     irmovl  $2,%ecx         # bump ecx up 1
+  0x035: 10           |     nop
+  0x036: 10           |     nop
+  0x037: 10           |     nop
+  0x038: 00           |     halt
+  0x039: 10           |     nop
+  0x03a: 10           |     nop
+  0x03b: 10           |     nop
+  0x03c: 10           |     nop
+  0x03d: 10           |     nop
+  0x040:              |     .align 4
+  0x100:              |     .pos 0x100
+  0x100:              | out:
+                      | 

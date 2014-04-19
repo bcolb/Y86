@@ -1,0 +1,43 @@
+        .pos    0x000
+       
+        irmovl  array1, %esp    # get it started 
+        nop
+        nop
+        popl   %eax             # sneaky math here puts each one in place
+        nop
+        nop
+        popl   %ebx
+        nop
+        nop
+        popl   %ecx
+        nop
+        nop
+        irmovl  end,%esp        # work backwards to copy into array
+        nop
+        nop
+        pushl   %ecx
+        nop
+        nop
+        pushl   %ebx
+        nop
+        nop
+        pushl   %eax
+        nop
+        nop
+        halt
+        nop
+        nop
+        nop
+        nop
+        nop
+
+        .align 4
+        .pos 0x100
+array1: .long 1
+        .long 2
+        .long 3
+        .pos 0x200
+array2: .long 0
+        .long 0
+        .long 0
+end:

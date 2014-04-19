@@ -1,0 +1,32 @@
+        .pos 0x000
+        irmovl  array1,%eax 
+        irmovl  array2,%ebx
+        nop                     # make sure it gets there
+        nop
+        mrmovl  (%eax),%ecx     # get the val out
+        nop
+        nop
+        rmmovl  %ecx,(%ebx)     # write it to first location
+        mrmovl  4(%eax),%edx    # read it
+        nop
+        nop
+        rmmovl  %edx,4(%ebx)    # write to the next one
+        mrmovl  8(%eax),%edx    # get another
+        nop
+        nop
+        rmmovl  %edx,8(%ebx)    # write it
+        halt
+        nop
+        nop
+        nop
+        nop
+        nop
+        .align  4
+        .pos 0x100
+array1: .long 1
+        .long 2
+        .long 3
+        .pos 0x200
+array2: .long 0
+        .long 0 
+        .long 0

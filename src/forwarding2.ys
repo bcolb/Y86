@@ -1,0 +1,25 @@
+    .pos 0x000
+    irmovl  $5,%edx
+    nop
+    nop
+    nop
+    irmovl  $1,%ecx
+    nop
+    subl    %ecx,%edx
+    nop
+    nop
+    nop
+    irmovl  out,%esi
+    rmmovl  %edx,(%esi)
+    nop
+    nop
+    halt
+    nop
+    nop
+    nop
+    nop
+    nop
+    .align 4
+    .pos 0x100
+out: 
+    .long   0

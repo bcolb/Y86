@@ -1,0 +1,92 @@
+                      | 
+                      | #
+                      | #    This file tests the call and return instructions
+                      | #    by calling a recursive maxTree function. The maxTree
+                      | #    function finds the maximum value in a binary tree.
+                      | #
+                      | #    Don't change this code
+  0x000:              |         .pos 0
+  0x000: 30f400040000 |         irmovl Stack, %esp
+  0x006: 30f500040000 |         irmovl Stack, %ebp
+  0x00c: 7011000000   |         jmp Main
+                      | #
+                      | #    Don't change this code
+  0x011: 30f16c000000 | Main:   irmovl root, %ecx               # root of binary tree
+  0x017: a01f         |         pushl %ecx
+  0x019: 8024000000   |         call maxTree                    # gets max of tree; result in %eax
+  0x01e: c007000000   |         dump 7
+  0x023: 00           |         halt
+                      | #
+                      | #       int maxTree(Tree * treeptr)
+                      | #       {
+                      | #          if (treeptr == NULL)
+                      | #              return 0;
+                      | #          else if (treeptr->right == NULL)
+                      | #              return treeptr->value
+                      | #          else
+                      | #              return maxTree(treeptr->right)
+                      | #
+                      | #       }
+                      | #
+                      | 
+  0x024: a05f         | maxTree:    pushl    %ebp
+  0x026: 2045         |             rrmovl  %esp,%ebp
+  0x028: 503508000000 |             mrmovl  8(%ebp),%ebx   #root
+  0x02e: 30f104000000 |             irmovl  $4,%ecx         #traveler
+  0x034: 503300000000 |             mrmovl  (%ebx),%ebx     #value of long in tree
+  0x03a: 30f700000000 |             irmovl  $0,%edi         #the test value
+  0x040: 6173         |             subl    %edi,%ebx       #is it the one...
+  0x042: 7365000000   |             je      end             #jump if equal
+  0x047: 10           |             nop                     #allow it to propogate thru
+  0x048: 10           |             nop
+  0x049: b00f         |             popl    %eax            #get value of long
+  0x04b: 6010         |             addl    %ecx,%eax       #increment to next one
+  0x04d: 500000000000 |             mrmovl  (%eax),%eax     #snatch it out
+  0x053: 6170         |             subl    %edi,%eax       #check the next one 
+  0x055: 7365000000   |             je      end             #if it is...JUMP
+  0x05a: 400400000000 |             rmmovl  %eax,(%esp)     #this might be the issue, put back...
+  0x060: 8024000000   |             call maxTree
+                      |             
+  0x065: 90           | end:        ret
+  0x066: 10           |             nop
+  0x067: 10           |             nop
+  0x068: 10           |             nop
+                      |            
+                      | 
+                      | #    Don't change this code
+  0x06c:              |          .align 4
+  0x06c: 78000000     | root:    .long t1         #pointer to left node
+  0x070: 9c000000     |          .long t2         #pointer to right node
+  0x074: 12000000     |          .long 0x12       #value of node
+                      | 
+  0x078: 84000000     | t1:      .long t3 
+  0x07c: 90000000     |          .long t4
+  0x080: 06000000     |          .long 0x6
+                      | 
+  0x084: 00000000     | t3:      .long 0 
+  0x088: 00000000     |          .long 0
+  0x08c: 03000000     |          .long 0x3
+                      | 
+  0x090: 00000000     | t4:      .long 0 
+  0x094: 00000000     |          .long 0
+  0x098: 08000000     |          .long 0x8
+                      | 
+  0x09c: a8000000     | t2:      .long t5
+  0x0a0: b4000000     |          .long t6
+  0x0a4: 20000000     |          .long 0x20
+                      | 
+  0x0a8: 00000000     | t5:      .long 0
+  0x0ac: 00000000     |          .long 0
+  0x0b0: 16000000     |          .long 0x16
+                      | 
+  0x0b4: 00000000     | t6:      .long 0
+  0x0b8: c0000000     |          .long t7
+  0x0bc: 22000000     |          .long 0x22
+                      | 
+  0x0c0: 00000000     | t7:      .long 0
+  0x0c4: 00000000     |          .long 0
+  0x0c8: 24000000     |          .long 0x24
+                      | 
+  0x400:              |          .pos 0x400
+  0x400:              | Stack:
+                      | 

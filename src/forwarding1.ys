@@ -1,0 +1,27 @@
+    .pos 0x000
+    irmovl  $5,%edx
+    nop
+    nop
+    nop
+    irmovl  $1,%ecx
+    subl    %ecx,%edx
+    nop
+    nop
+    nop
+    nop
+    nop
+    mrmovl  (%edx),%ebx
+    nop
+    nop
+    nop
+    rmmovl  %ebx,(%eax)
+    nop
+    nop
+    nop
+    nop
+    halt
+    nop
+    nop
+    nop
+    nop
+    nop

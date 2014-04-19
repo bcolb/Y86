@@ -1,0 +1,46 @@
+    .pos 0x000
+    irmovl  $5,%edx
+    irmovl  out,%esi
+    irmovl  $69,%ecx
+    irmovl  $2,%ebx
+    irmovl  $1,%ecx
+    nop                     # test M_valE valA
+    subl    %ecx,%edx       # test e_valE valA, register read valB
+    subl    %ebx,%edx       # e_valE valB
+    rmmovl  %edx,(%esi)     # 2 into 0x100
+    mrmovl  (%edx),%eax     # 5 into eax
+    irmovl  $2,%ecx         # bump ecx up 1
+    nop                     # get it into writeback
+    nop
+    addl    %ecx,%ecx       # W_valE for ecx valA & valB
+    rrmovl  %ecx,%ebx       # more e_valE stuff...valA
+    nop                     # now test W_valM valA 4 into ebx          
+    addl    %ebx,%edx       # 8 into edx
+    rrmovl  %edx,%eax       # move it and overwrite eax with 8
+    nop                     # get it to writeback
+    subl    %ebx,%eax       # test W_valM for valB
+    rmmovl  %eax,4(%esi)    # out 0x104 gets 4
+    irmovl  $10,%edx
+    nop
+    addl    %ebx,%edx       # test M_valE for valB
+    rmmovl  %edx,8(%esi)    # 14 (decimal) into out 0x108 
+    mrmovl  8(%esi),%ecx    # m_valM for ValA = 14 (decimal) into ecx
+    addl    %ebx,%ecx       # m_valM for valB = 18 into ecx 
+    rmmovl  %ecx,12(%esi)   # write it to 0x10c
+    nop
+    nop
+    halt
+    nop
+    nop
+    nop
+    nop
+    nop
+    .align 4
+    .pos 0x100
+out: 
+    .long   0
+    .long   0
+    .long   0
+    .long   0
+    .long   1
+    .long   0

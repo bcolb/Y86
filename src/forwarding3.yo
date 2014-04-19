@@ -1,0 +1,47 @@
+                      | 
+  0x000:              |     .pos 0x000
+  0x000: 30f205000000 |     irmovl  $5,%edx
+  0x006: 30f600010000 |     irmovl  out,%esi
+  0x00c: 30f145000000 |     irmovl  $69,%ecx
+  0x012: 30f302000000 |     irmovl  $2,%ebx
+  0x018: 30f101000000 |     irmovl  $1,%ecx
+  0x01e: 10           |     nop                     # test M_valE valA
+  0x01f: 6112         |     subl    %ecx,%edx       # test e_valE valA, register read valB
+  0x021: 6132         |     subl    %ebx,%edx       # e_valE valB
+  0x023: 402600000000 |     rmmovl  %edx,(%esi)     # 2 into 0x100
+  0x029: 500200000000 |     mrmovl  (%edx),%eax     # 5 into eax
+  0x02f: 30f102000000 |     irmovl  $2,%ecx         # bump ecx up 1
+  0x035: 10           |     nop                     # get it into writeback
+  0x036: 10           |     nop
+  0x037: 6011         |     addl    %ecx,%ecx       # W_valE for ecx valA & valB
+  0x039: 2013         |     rrmovl  %ecx,%ebx       # more e_valE stuff...valA
+  0x03b: 10           |     nop                     # now test W_valM valA 4 into ebx          
+  0x03c: 6032         |     addl    %ebx,%edx       # 8 into edx
+  0x03e: 2020         |     rrmovl  %edx,%eax       # move it and overwrite eax with 8
+  0x040: 10           |     nop                     # get it to writeback
+  0x041: 6130         |     subl    %ebx,%eax       # test W_valM for valB
+  0x043: 400604000000 |     rmmovl  %eax,4(%esi)    # out 0x104 gets 4
+  0x049: 30f20a000000 |     irmovl  $10,%edx
+  0x04f: 10           |     nop
+  0x050: 6032         |     addl    %ebx,%edx       # test M_valE for valB
+  0x052: 402608000000 |     rmmovl  %edx,8(%esi)    # 14 (decimal) into out 0x108 
+  0x058: 501608000000 |     mrmovl  8(%esi),%ecx    # m_valM for ValA = 14 (decimal) into ecx
+  0x05e: 6031         |     addl    %ebx,%ecx       # m_valM for valB = 18 into ecx 
+  0x060: 40160c000000 |     rmmovl  %ecx,12(%esi)   # write it to 0x10c
+  0x066: 10           |     nop
+  0x067: 10           |     nop
+  0x068: 00           |     halt
+  0x069: 10           |     nop
+  0x06a: 10           |     nop
+  0x06b: 10           |     nop
+  0x06c: 10           |     nop
+  0x06d: 10           |     nop
+  0x070:              |     .align 4
+  0x100:              |     .pos 0x100
+  0x100:              | out: 
+  0x100: 00000000     |     .long   0
+  0x104: 00000000     |     .long   0
+  0x108: 00000000     |     .long   0
+  0x10c: 00000000     |     .long   0
+  0x110: 01000000     |     .long   1
+  0x114: 00000000     |     .long   0

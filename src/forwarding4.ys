@@ -1,0 +1,25 @@
+    .pos 0x000
+    irmovl  $5,%edx
+    irmovl  out,%esi
+    irmovl  $69,%ecx
+    irmovl  $2,%ebx
+    irmovl  $1,%ecx
+    nop                     # test M_valE valA
+    subl    %ecx,%edx       # test e_valE valA, register read valB
+    subl    %ebx,%edx       # e_valE valB
+    rmmovl  %edx,(%esi)     # 2 into 0x100
+    mrmovl  (%edx),%eax     # 5 into eax
+    irmovl  $2,%ecx         # bump ecx up 1
+    nop
+    nop
+    nop
+    halt
+    nop
+    nop
+    nop
+    nop
+    nop
+    .align 4
+    .pos 0x100
+out:
+

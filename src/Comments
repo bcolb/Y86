@@ -1,0 +1,28 @@
+
+makefile
+
+registers.c 
+
+memory.c
+
+decodeStage.h 
+decodeStage.c 
+
+executeStage.h 
+executeStage.c 
+
+memoryStage.h 
+memoryStage.c 
+
+writebackStage.h
+writebackStage.c
+
+Documentation:
+
+Style:
+
+Correctness:
+
+Style Score:
+
+Correctness Score:
